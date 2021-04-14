@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.javateam.springIoC.bean" />
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="javaBean" class="com.javateam.springIoC.bean.JavaBean">
+	<!-- <bean id="javaBean" class="com.javateam.springIoC.bean.JavaBean">
 		<constructor-arg type="String" name="name" value="스프링" />
-		<!-- <property name="name" value="spring 3.1.1" /> -->
+		<property name="name" value="spring 3.1.1" />
 		<property name="bean2" ref="javaBean2" />
 	</bean>
 	
 	<bean id="javaBean2" class="com.javateam.springIoC.bean.JavaBean2">
 		<property name="name" value="제어의 역전 프로그래밍" />
-	</bean>
+	</bean> -->
 		
 </beans>

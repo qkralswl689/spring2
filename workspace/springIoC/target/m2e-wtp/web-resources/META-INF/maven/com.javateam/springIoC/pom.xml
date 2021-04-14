@@ -99,6 +99,14 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+		
+		<!-- @Resource -->
+		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.3.2</version>
+		</dependency>		
 				
 	    <!-- Servlet 4.0/JSP2.3 -->
         <dependency>
@@ -130,7 +138,7 @@
 			<scope>test</scope>
 		</dependency>      
 		
-		<!-- // 이전 버전의 경우 => 현재버전 : hamcrest 뺌
+		<!-- // 이전 버전의 경우
 		<dependency>
 		   <groupId>junit</groupId>
 		   <artifactId>junit</artifactId>

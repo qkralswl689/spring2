@@ -21,8 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.javateam.springIoC" />
-	
+	<context:component-scan base-package="com.javateam.springIoC.bean" />
+		
 	<!-- java bean -->
 	<!-- <context:component-scan base-package="com.javateam.spring_IoC.bean" /> -->
 	

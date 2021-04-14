@@ -3,15 +3,17 @@
  */
 package com.javateam.springIoC.bean;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
  * @author javateam
  *
  */
-// @Component
+@Component
 public class JavaBean2 {
 	
+	@Value("제어의 역전 프로그래밍")
 	public String name;
 
 	public String getName() {

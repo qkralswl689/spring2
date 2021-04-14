@@ -3,8 +3,13 @@
  */
 package com.javateam.springIoC.bean;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +17,7 @@ import org.springframework.stereotype.Component;
  * @author javateam
  *
  */
-// @Component
+@Component
 public class JavaBean {
 	
 	private static final Logger log 
@@ -20,9 +25,11 @@ public class JavaBean {
 	
 	public String name;
 	
+	@Autowired
 	public JavaBean2 bean2;
 
-	public JavaBean(String name) {
+	@Autowired
+	public JavaBean(@Value("스프링") String name) {
 		
 		log.info("생성자 인자 : " + name);
 		this.name = name;

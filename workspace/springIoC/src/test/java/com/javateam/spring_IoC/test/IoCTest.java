@@ -9,6 +9,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.hamcrest.CoreMatchers;
@@ -17,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -39,8 +41,8 @@ public class IoCTest {
 	
 	private static final Logger log = LoggerFactory.getLogger(IoCTest.class);
 	
-	// @Inject (결합)
 	@Autowired
+	// private JavaBean bean = new JavaBean("스프링");
 	private JavaBean bean;
 
 	@Test

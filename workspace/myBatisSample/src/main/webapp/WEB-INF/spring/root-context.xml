@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	
+	 <context:annotation-config />
+
+<!-- 	 <bean
+		 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		 <property name="locations">
+			 <value>WEB-INF/jdbc.properties</value>
+		 </property>
+	 </bean> -->
+
+<!-- 	 <bean id="dataSource"
+		 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		 <property name="driverClass" value="${jdbc.driverClassName}" />
+		 <property name="url" value="${jdbc.url}" />
+		 <property name="username" value="${jdbc.username}" />
+		 <property name="password" value="${jdbc.password}" />
+	 </bean> -->
+	 
+	 <!-- DB의 연결 근원, 여러개 사용가능하다(mySQL,oracle) -->
+ 	 <bean id="dataSource"
+		 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		 <property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		 <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		 <property name="username" value="hr" />
+		 <property name="password" value="hr" />
+	 </bean>
+	 
+  	  <bean id="dataSource2" 
+	 	   class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	       p:driverClassName="oracle.jdbc.OracleDriver"
+	       p:url="jdbc:oracle:thin:@localhost:1521:xe"
+	       p:username="hr" 
+	       p:password="hr"/>
+	       
+	 <bean id="dataSource3" 
+	 	   class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	 	   <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+	 	   <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	 	   <property name="username" value="hr" />
+	 	   <property name="password" value="hr" />
+     </bean>
+
+	<!-- myBatis 특징 -->
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		 <property name="dataSource" ref="dataSource" />
+		 <property name="typeAliasesPackage" value="com.javateam.myBatisSample.domain" />
+		 <property name="mapperLocations" value="classpath:mapper/*.xml" />
+	 </bean>
+
+	 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	 </bean>
+		
+</beans>

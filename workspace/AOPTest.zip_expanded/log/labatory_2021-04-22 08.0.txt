@@ -1,0 +1,18 @@
+2021-04-22 08:54:37 [main] DEBUG c.j.spring.aop.test.SimpleAOPTest - aop test debug
+2021-04-22 08:54:37 [main] INFO  c.j.spring.aop.test.SimpleAOPTest - aop test info
+2021-04-22 08:54:37 [main] WARN  c.j.spring.aop.test.SimpleAOPTest - aop test warning
+2021-04-22 08:54:37 [main] ERROR c.j.spring.aop.test.SimpleAOPTest - aop test error
+2021-04-22 08:54:37 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 열심히 공부합시다-2 !
+2021-04-22 08:54:37 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 열심히 공부합시다 !
+2021-04-22 08:54:37 [main] DEBUG c.j.spring.aop.bean.MsgBeanImpl - Hi~! Spring !
+2021-04-22 08:54:37 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 꼭 합격하세요 !
+2021-04-22 08:54:37 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 합격하고 좀 쉬자 !
+2021-04-22 08:55:46 [main] DEBUG c.j.spring.aop.test.SimpleAOPTest - aop test debug
+2021-04-22 08:55:46 [main] INFO  c.j.spring.aop.test.SimpleAOPTest - aop test info
+2021-04-22 08:55:46 [main] WARN  c.j.spring.aop.test.SimpleAOPTest - aop test warning
+2021-04-22 08:55:46 [main] ERROR c.j.spring.aop.test.SimpleAOPTest - aop test error
+2021-04-22 08:55:46 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 열심히 공부합시다-2 !
+2021-04-22 08:55:46 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 열심히 공부합시다 !
+2021-04-22 08:55:46 [main] DEBUG c.j.spring.aop.bean.MsgBeanImpl - Hi~! Spring !
+2021-04-22 08:55:46 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 꼭 합격하세요 !
+2021-04-22 08:55:46 [main] DEBUG c.j.spring.aop.advice.MsgAdvice - 합격하고 좀 쉬자 !

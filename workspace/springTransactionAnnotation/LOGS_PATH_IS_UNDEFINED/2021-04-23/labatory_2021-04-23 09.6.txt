@@ -1,0 +1,28 @@
+2021-04-23 09:10:40.342 [INFO ] [main] [2727] [o.s.t.c.t.TransactionContext] -- Began transaction (1) for test context [DefaultTestContext@468dda3e testClass = ReadTest, testInstance = com.javateam.springTranscationAnnotation.test.ReadTest@5527b211, testMethod = testTransaction@ReadTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6f89292e testClass = ReadTest, locations = '{file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml, file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@54cf7c6a]; rollback [true]
+2021-04-23 09:10:40.345 [INFO ] [main] [2730] [c.j.s.test.ReadTest] -- ######### 트랜잭션 read 테스트 ##############
+2021-04-23 09:10:40.348 [INFO ] [main] [2733] [c.j.s.aop.MyBatisAdvice] -- AOP Around begin : getAllMembers 메소드를 시작합니다-1.
+2021-04-23 09:10:40.349 [INFO ] [main] [2734] [c.j.s.aop.MyBatisAdvice] -- 
+
+#######################################################################################################################################################################################################
+
+2021-04-23 09:10:40.349 [INFO ] [main] [2734] [c.j.s.aop.MyBatisAdvice] -- 회원관리모듈 시작
+2021-04-23 09:10:40.349 [INFO ] [main] [2734] [c.j.s.aop.MyBatisAdvice] -- 인자[]으로 getAllMembers 메소드를 시작합니다.
+2021-04-23 09:10:40.349 [INFO ] [main] [2734] [c.j.s.aop.MyBatisAdvice2] -- AOP Around begin : getAllMembers 메소드를 시작합니다-2.
+2021-04-23 09:10:40.349 [INFO ] [main] [2734] [c.j.s.aop.MyBatisAdvice2] -- AOP : 회원 모듈 실행 시작 !
+2021-04-23 09:10:40.349 [INFO ] [main] [2734] [c.j.s.d.TransactionDAOMyBatisImpl] -- getAllMembers
+2021-04-23 09:10:40.354 [DEBUG] [main] [2739] [o.m.spring.SqlSessionUtils] -- Creating a new SqlSession
+2021-04-23 09:10:40.358 [DEBUG] [main] [2743] [o.m.spring.SqlSessionUtils] -- Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]
+2021-04-23 09:10:40.364 [DEBUG] [main] [2749] [o.m.s.t.SpringManagedTransaction] -- JDBC Connection [oracle.jdbc.driver.T4CConnection@3ec2ecea] will be managed by Spring
+2021-04-23 09:10:40.367 [DEBUG] [main] [2752] [c.j.s.m.M.getAllMembers] -- ==>  Preparing: SELECT * FROM member_temp2 
+2021-04-23 09:10:40.454 [DEBUG] [main] [2839] [c.j.s.m.M.getAllMembers] -- ==> Parameters: 
+2021-04-23 09:10:40.511 [DEBUG] [main] [2896] [c.j.s.m.M.getAllMembers] -- <==      Total: 1
+2021-04-23 09:10:40.512 [DEBUG] [main] [2897] [o.m.spring.SqlSessionUtils] -- Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]
+2021-04-23 09:10:40.512 [INFO ] [main] [2897] [c.j.s.aop.MyBatisAdvice2] -- AOP Around end : getAllMembers 메소드를 끝냈습니다-2.
+2021-04-23 09:10:40.512 [INFO ] [main] [2897] [c.j.s.aop.MyBatisAdvice2] -- AOP : 회원 모듈 실행 끝 !
+2021-04-23 09:10:40.512 [INFO ] [main] [2897] [c.j.s.aop.MyBatisAdvice] -- AOP Around end : getAllMembers 메소드를 끝냈습니다-1.
+2021-04-23 09:10:40.512 [INFO ] [main] [2897] [c.j.s.aop.MyBatisAdvice] -- getAllMembers 메소드를 끝냈습니다.
+2021-04-23 09:10:40.512 [INFO ] [main] [2897] [c.j.s.aop.MyBatisAdvice] -- 
+
+#######################################################################################################################################################################################################
+
+2021-04-23 09:10:40.512 [DEBUG] [main] [2897] [o.m.spring.SqlSessionUtils] -- Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]

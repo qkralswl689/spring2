@@ -1,0 +1,7 @@
+/**
+ * 
+ */
+function demo() {
+	
+	alert("test");
+}

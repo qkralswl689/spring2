@@ -1,0 +1,19 @@
+2021-04-23 09:19:13.324 [INFO ] [main] [2639] [c.j.s.aop.MyBatisAdvice2] -- AOP Around begin : getAllMembers 메소드를 시작합니다-2.
+2021-04-23 09:19:13.325 [INFO ] [main] [2640] [c.j.s.aop.MyBatisAdvice2] -- AOP : 회원 모듈 실행 시작 !
+2021-04-23 09:19:13.325 [INFO ] [main] [2640] [c.j.s.d.TransactionDAOMyBatisImpl] -- getAllMembers
+2021-04-23 09:19:13.330 [DEBUG] [main] [2645] [o.m.spring.SqlSessionUtils] -- Creating a new SqlSession
+2021-04-23 09:19:13.333 [DEBUG] [main] [2648] [o.m.spring.SqlSessionUtils] -- Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]
+2021-04-23 09:19:13.339 [DEBUG] [main] [2654] [o.m.s.t.SpringManagedTransaction] -- JDBC Connection [oracle.jdbc.driver.T4CConnection@3ec2ecea] will be managed by Spring
+2021-04-23 09:19:13.462 [DEBUG] [main] [2777] [o.m.spring.SqlSessionUtils] -- Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]
+2021-04-23 09:19:13.462 [INFO ] [main] [2777] [c.j.s.aop.MyBatisAdvice2] -- AOP Around end : getAllMembers 메소드를 끝냈습니다-2.
+2021-04-23 09:19:13.462 [INFO ] [main] [2777] [c.j.s.aop.MyBatisAdvice2] -- AOP : 회원 모듈 실행 끝 !
+2021-04-23 09:19:13.462 [INFO ] [main] [2777] [c.j.s.aop.MyBatisAdvice] -- AOP Around end : getAllMembers 메소드를 끝냈습니다-1.
+2021-04-23 09:19:13.462 [INFO ] [main] [2777] [c.j.s.aop.MyBatisAdvice] -- getAllMembers 메소드를 끝냈습니다.
+2021-04-23 09:19:13.462 [INFO ] [main] [2777] [c.j.s.aop.MyBatisAdvice] -- 
+
+#######################################################################################################################################################################################################
+
+2021-04-23 09:19:13.462 [DEBUG] [main] [2777] [o.m.spring.SqlSessionUtils] -- Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]
+2021-04-23 09:19:13.462 [DEBUG] [main] [2777] [o.m.spring.SqlSessionUtils] -- Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@496a31da]
+2021-04-23 09:19:13.464 [INFO ] [main] [2779] [o.s.t.c.t.TransactionContext] -- Rolled back transaction for test: [DefaultTestContext@468dda3e testClass = ReadTest, testInstance = com.javateam.springTranscationAnnotation.test.ReadTest@5527b211, testMethod = testTransaction@ReadTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6f89292e testClass = ReadTest, locations = '{file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml, file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.test.context.web.WebDelegatingSmartContextLoader', parent = [null]]]
+2021-04-23 09:19:13.468 [INFO ] [Thread-1] [2783] [o.s.w.c.s.GenericWebApplicationContext] -- Closing org.springframework.web.context.support.GenericWebApplicationContext@140e5a13: startup date [Fri Apr 23 09:19:11 KST 2021]; root of context hierarchy

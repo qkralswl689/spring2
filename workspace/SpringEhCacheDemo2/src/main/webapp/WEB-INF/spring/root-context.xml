@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- Addtional Trasactional Usage : @Transactional ~~ -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<context:annotation-config />
+
+	<!-- AOP ready -->
+	<aop:aspectj-autoproxy />
+
+	<!-- // apache DBCP2 -->
+<!-- 	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close" p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:xe" 
+		p:username="hr"
+		p:password="hr" 
+		p:maxTotal="10" 
+		p:maxIdle="5" 
+		p:maxWaitMillis="-1" /> -->
+		
+	<!-- log4jdbc용 JDBC 설정 -->
+	<!-- 
+	 	주의) log4jdbc용 전용 JDBC 드라이버 = net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+	 	주의) log4jdbc용 전용 URL 모드 = jdbc:log4jdbc:oracle:thin:@localhost:1521:xe 
+ 	 -->
+    <bean id="dataSource" 
+     	   class="org.apache.commons.dbcp2.BasicDataSource"    
+		   destroy-method="close"  
+		   p:driverClassName="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"  
+		   p:url="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"  
+		   p:username="hr"  
+		   p:password="hr"  
+		   p:initialSize="0"
+		   p:maxTotal="10"  
+		   p:maxIdle="5"  
+		   p:maxWaitMillis="-1" /> 	
+
+	<!-- MyBatis -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- <tx:jta-transaction-manager /> -->
+
+	<!-- Transaction Advices -->
+	<!-- ////////////////////////////////////////////////////////////// -->
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="getAll" read-only="true" />
+			<tx:method name="updateCommissionPct" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- ////////////////////////////////////////////////////////////// -->
+
+	<!-- AOP Transaction config -->
+	<aop:config>
+		<aop:advisor pointcut="execution(* *..EmployeesService.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate"
+		p:transactionManager-ref="transactionManager" />
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage"
+			value="com.javateam.SpringEhCacheDemo.domain" />
+		<property name="mapperLocations"
+			value="classpath:com/javateam/SpringEhCacheDemo/mapper/*.xml" />
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="mapUnderscoreToCamelCase" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
+	</bean>
+
+</beans>

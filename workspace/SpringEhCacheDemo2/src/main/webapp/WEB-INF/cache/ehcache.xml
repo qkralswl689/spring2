@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+	monitoring="autodetect" dynamicConfig="true">
+	
+	<!-- docs link : 
+		https://www.ehcache.org/documentation/3.6/107.html (JSR-107 지원)
+		https://www.ehcache.org/documentation/3.6/getting-started.html
+		http://www.ehcache.org/ehcache.xml 
+	-->
+
+	<diskStore path="java.io.tmpdir" /> <!-- 임시 저장 경로 -->
+
+	<cache name="sampleCache" 
+		   maxElementsInMemory="100"
+		   maxEntriesLocalHeap="100"
+		   eternal="false" 
+		   overflowToDisk="false" 
+		   timeToLiveSeconds="60"
+		   timeToIdleSeconds="60"
+		   diskPersistent="false" 
+		   memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="samplePromotionCache" 
+		   maxElementsInMemory="100" 
+		   eternal="false"
+		   overflowToDisk="false" 
+		   timeToLiveSeconds="60" 
+		   timeToIdleSeconds="60"
+		   diskPersistent="false"
+		   memoryStoreEvictionPolicy="LRU" />
+
+<!-- example -->
+
+<!-- 
+
+ maxEntriesLocalHeap : 메모리에 생성될 최대 객체 수
+ 
+ maxEntriesLocalDisk : 디스크(diskStore)에 생성될 최대 객체 수
+ 
+ eternal="false" : 디스크(diskStore)에 저장된 캐시의  삭제 여부 설정.
+     : 참고로 true 설정시  timeToIdleSeconds, timeToLiveSeconds 설정이 무시됨(ignore)
+ 
+ timeToIdleSeconds : 입력된 시간(초단위) 캐시를 사용하지 않으면(idle) 캐시를 삭제함
+ 
+ timeToLiveSeconds : 입력된 시간(초단위)가 지나면 캐시가 자동 삭제됨. 캐시 생성 시간
+ 
+ diskExpiryThreadIntervalSeconds 
+  : disk Expiry Thread 작업(디스크에 저장된 캐시들을 정리하기 위한 작업) 실행 시간 간격을 설정. 기본값 120초
+ 
+ diskSpoolBufferSizeMB: 스풀 버퍼(spool buffer)에 대한 디스크(DiskStore) 크기 설정. 
+ 	OutOfMemory(메모리 leak) 에러가 발생 시 설정한 크기 낮추는 것 권장.
+ 	
+ logging : 로깅 사용 여부
+ 
+ maxEntriesInCache: Terracotta(http://www.terracotta.org/terracotta-ehcache/)의 분산캐시에만 사용가능하며, 
+      클러스터에 저장 할 수 있는 최대 엔트리 수를 설정. 0은 무제한. 캐시가 작동하는 동안 속성 수정 가능.
+
+ overflowToOffHeap: 이 설정은 Ehcache enterprise 버전에서 사용 가능. 
+ true 로 설정하며 성능을 향상시킬 수 있는 Off-heap 메모리 스토리지를 활용하여 캐시 사용가능. 
+ Off-heap 메모리 자바의 GC(garbage collection)에 영향을 주지 않음. 기본값은 false
+ 
+ memoryStoreEvictionPolicy 
+    : 객체의 수량이 maxEntriesLocalHeap 개수에 도달하면 개체를 제거하고 새로 추가(갱신) 하는 정책(policy) 설정.
+	
+   ex) LRU, FIFO, LFU 
+   
+   - LRU: 사용 빈도가 가장 적었던  것부터 제거
+   - FIFO: 먼저 입력된 것부터 제거
+   - LFU: 사용량이 적은 것부터 제거 
+
+   참고) 캐시 (페이징) 교체 알고리즘들
+   
+   - LRU 페이징 처리 방식 
+     : https://ko.wikipedia.org/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80_%EA%B5%90%EC%B2%B4_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
+     
+   - LFU 페이징 처리 방식
+     : https://en.wikipedia.org/wiki/Least_frequently_used
+     
+   - FIFO 페이징 처리 방식 
+     : https://ko.wikipedia.org/wiki/%EC%84%A0%EC%9E%85_%EC%84%A0%EC%B6%9C
+     : https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)  
+   
+   - https://m.blog.naver.com/PostView.nhn?blogId=kyung778&logNo=60164009610&proxyReferer=https%3A%2F%2Fwww.google.com%2F   
+   - https://sqlangeles.com/2018/01/11/fifo-최적optimal-lruleast-recently-used-페이지-교체/
+       
+       
+    참고) 비추천(deprecated) 처리된 항목들
+    
+    overflowToDisk,	diskPersistent, diskAccessStripes, 
+    maxElementsInMemory, maxElementsOnDisk, maxMemoryOffHeap 
+       
+ -->
+
+<!--     
+	<defaultCache
+            maxEntriesLocalHeap="10000"
+            maxEntriesLocalDisk="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"/>
+    
+    <cache name="promotionCache"
+            maxElementsInMemory="10"
+            eternal="false"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="600"
+            memoryStoreEvictionPolicy="LRU" /> 
+-->
+
+</ehcache>

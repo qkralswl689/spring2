@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.javateam.SpringEhCacheDemo.mapper.EmployeesMapper">
+
+	 <select id="getAllEmployees" resultType="com.javateam.SpringEhCacheDemo.domain.EmployeesVO">
+		 SELECT * FROM EMPLOYEES ORDER BY EMPLOYEE_ID
+	 </select>
+	 
+	 <update id="updateEmployeesCommissionPct" parameterType="float">
+	 	 UPDATE EMPLOYEES SET COMMISSION_PCT = #{commissionPct}
+	 </update>
+
+</mapper>

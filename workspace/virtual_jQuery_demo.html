@@ -1,0 +1,72 @@
+<!DOCTYPE html>    
+<html lang="ko">    
+<head>    
+<meta charset="UTF-8">    
+<title>test</title>    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+<script>    
+$(function() {    
+     
+    // 테이블 작성  
+    var tbl_content =  
+        "<thead>"+   
+            "<tr>" +
+                "<th>제목</th>"+    
+                "<th>내용</th>"+    
+                "<th>메뉴</th>"+
+            "</tr>" +    
+        "</thead>"+    
+        "<tbody>"+    
+            "<tr>"+    
+                "<td>JSP</td>"+    
+                "<td>2.3</td>"+  
+                "<td> </td>"+    
+            "</tr>"+    
+            "<tr>"+    
+                "<td>Servlet</td>"+    
+                "<td>4.0</td>"+  
+                "<td> </td>"+  
+            "</tr>"+        
+        "</tbody>"+    
+        "<tfoot>"+    
+            "<tr>"+    
+                "<td colspan='3'>최하단</td>"+    
+            "</tr>"+    
+        "</tfoot>";  
+     
+    $("table[name=tbl]").append(tbl_content);  
+     
+    var count = 0;  
+       
+    $("#btn").click(function() {    
+           
+        var newContent = "<tr bgcolor=cyan>"+    
+                         " <td>Spring</td>"+    
+                         " <td>5.x</td>"+    
+                         " <td><button id='btn_"+(count++)+"'>가상 버튼</button></td>"+  
+                         "</tr>";    
+        $("table[name=tbl]:last-child").append(newContent);    
+    });  
+     
+     
+    // 가상(동적) 버튼 요소 이벤트 핸들링  
+    // $("button[id^=btn_]").click(function() {  // 이렇게 하면 가상 버튼이 제어가 안됩니다.
+    // 동적으로 만들어진 것은 아래처럼 "on"을 사용하여 동적 HTML 컴포넌트를 제어해야 됩니다.  
+    $("table").on('click', 'button[id^=btn_]' , function() {  
+         
+        alert("button click !");          
+    });  
+       
+});    
+   
+</script>    
+</head>    
+<body>    
+   
+    <button type="button" id="btn">버튼</button><br>    
+   
+    <table name="tbl" border="1" width="300">    
+    </table>    
+   
+</body>    
+</html>    

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- base layout -->
+	<definition name="base_layout" template="/WEB-INF/tiles/layout/base_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp" />
+	</definition>
+	
+	<!-- login layout -->
+	<!-- 
+	<definition name="login_layout" template="/WEB-INF/tiles/layout/login_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer.jsp" />
+	</definition> -->
+	
+	<!-- base -->
+	<definition name="/*/*" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<!-- login -->    
+    <!-- <definition name="/login/*" extends="login_layout">
+      	<put-attribute name="body" value="/WEB-INF/views/login/{1}.jsp" />
+    </definition> -->
+    
+    
+    <!-- another layout -->
+    <definition name="another_layout" template="/WEB-INF/tiles/layout/another_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header2.jsp" />
+		<put-attribute name="body"   value="/WEB-INF/views/main/another.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/layout/footer2.jsp" />
+	</definition>    
+	
+</tiles-definitions>

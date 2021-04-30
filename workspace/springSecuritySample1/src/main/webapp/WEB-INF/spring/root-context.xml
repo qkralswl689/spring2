@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- apache DBCP2 -->  
+	<bean id="dataSourceDBCP" 
+	    class="org.apache.commons.dbcp2.BasicDataSource"    
+		destroy-method="close"  
+		p:driverClassName="oracle.jdbc.OracleDriver"  
+		p:url="jdbc:oracle:thin:@localhost:1521:xe"  
+		p:username="sample"  
+		p:password="sample"  
+		p:maxTotal="10"  
+		p:maxIdle="5"  
+		p:maxWaitMillis="-1" />   
+		   
+	<!-- HikariCP -->
+	<!-- https://github.com/brettwooldridge/HikariCP/wiki/HikariCP-Articles -->
+	<!-- https://examples.javacodegeeks.com/enterprise-java/hikaricp/hikaricp-connection-pooling-example/ -->
+	<bean id="dataSourceHiKariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="sample"/>
+		<property name="password" value="sample"/>
+	</bean>	   
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg ref="dataSourceHiKariConfig" />
+	</bean>
+     
+     <bean id="sqlSessionFactory" 
+        		class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource" />
+         <property name="typeAliasesPackage" 
+              		     value="com.javateam.springSecuritySample1.vo" />
+         <property name="mapperLocations"
+              		     value="classpath:/mapper/*.xml" />
+     </bean>
+ 
+     <bean id="sqlSession" 
+           class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache"> 
+         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+     </bean>
+    
+</beans>

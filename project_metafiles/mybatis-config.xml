@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+	 	<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+	   <package name="프로젝트 패키지.domain" />
+	</typeAliases>  
+	
+	<typeHandlers>
+		<typeHandler handler="프로젝트 패키지.typehandler.CustomDateHandler" 
+					 javaType="java.util.Date" 
+					 jdbcType="DATE"/>
+	</typeHandlers>
+
+</configuration>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.MemberMapper">
+
+	<select id="isMember" parameterType="String" resultType="int">
+		SELECT count(*) FROM member_tbl
+		WHERE member_id=#{memberId}
+	</select>
+	
+	<select id="isEnableEmail" parameterType="String" resultType="int">
+		SELECT count(*) FROM member_tbl
+		WHERE member_email=#{memberEmail}
+	</select>
+	
+	<select id="isEnablePhone" parameterType="String" resultType="int">
+		SELECT count(*) FROM member_tbl
+		WHERE member_phone=#{memberPhone}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO member_tbl VALUES 
+		(
+			#{memberId},
+			#{memberNickname},
+			#{memberName},
+			#{memberGender},
+			#{memberEmail},
+			#{memberPhone},
+			#{memberBirth},
+			#{memberZip},
+			nvl(#{memberAddress}, ''),
+			sysdate
+		)
+	</insert>
+	
+</mapper>

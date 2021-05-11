@@ -36,4 +36,33 @@
 		(user_roles_seq.nextval, #{username}, #{role})
 	</insert>	
 	
+	<!-- 추가 -->
+	<select id="loadUserByUsername" parameterType="String" resultType="Users">
+		SELECT * FROM users WHERE username=#{username}
+	</select>
+	
+	<select id="loadUserRole" parameterType="String" resultType="Role">
+		SELECT username, role FROM user_roles WHERE username=#{username}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateUser">
+		UPDATE users SET password=#{password}
+		WHERE username=#{username}
+	</update>
+	
+	<!-- 회원 정보 삭제 -->
+	<!-- 삭제시 테이블 순서에 유의해야 됩니다 -->
+	<delete id="deleteUser" parameterType="String">
+		{call
+	        declare
+	        begin
+		        DELETE user_roles WHERE username=#{username};
+	            DELETE users WHERE username=#{username};
+	        end
+	    }
+	</delete>
+	
+	
+	
 </mapper>

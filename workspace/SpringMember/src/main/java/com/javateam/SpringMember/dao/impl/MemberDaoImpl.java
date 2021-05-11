@@ -1,5 +1,8 @@
 package com.javateam.SpringMember.dao.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,6 +52,46 @@ public class MemberDaoImpl implements MemberDao {
 
 		log.debug("dao getMember");
 		return sqlSession.selectOne("mapper.MemberMapper.getMember", memberId);
+	}
+	
+	@Override
+	public void updateMember(MemberVO member) {
+
+		log.debug("dao updateMember");
+		sqlSession.update("mapper.MemberMapper.updateMember", member);
+	}
+
+	@Override
+	public void deleteMember(String memberId) {
+
+		log.debug("dao deleteMember");
+		sqlSession.delete("mapper.MemberMapper.deleteMember", memberId);
+	}
+	
+	@Override
+	public boolean isEnableEmail(String memberId, String email) {
+		
+		log.debug("dao isEnableEmail");
+		log.info("아이디 : "+memberId);
+		log.info("이메일 : "+email);		
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("email", email);
+		
+		return (int)sqlSession.selectOne("mapper.MemberMapper.isEnableEmailUpdate", map) == 1 ? true : false;
+	}
+
+	@Override
+	public boolean isEnablePhone(String memberId, String phone) {
+		
+		log.debug("dao isEnablePhone");
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("phone", phone);
+		
+		return (int)sqlSession.selectOne("mapper.MemberMapper.isEnablePhoneUpdate", map) == 1 ? true : false;
 	}
 
 }

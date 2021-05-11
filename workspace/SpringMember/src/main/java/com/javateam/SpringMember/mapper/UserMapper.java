@@ -29,4 +29,14 @@ public interface UserMapper {
 	void insertUserRoles(@Param("username") String username, 
 						 @Param("role") String role);
 
+	// 추가
+	Role loadUserRole(@Param("username") String useranme);
+	
+	// 추가 : 패쓰워드 갱신(수정)
+	void updateUser(@Param("username") String username,
+					@Param("password") String password);
+	
+	// 추가 : 회원 정보 삭제(패쓰워드, role)
+	void deleteUser(String username);
+
 }

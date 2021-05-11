@@ -34,5 +34,14 @@ public class AuthMyBatisServiceImpl implements AuthMyBatisService {
 		dao.insertUsers(users, role);
 	}
 	
+	@Override
+	public void updateUsers(Users users) {
+		dao.updateUsers(users);
+	}
+
+	@Override
+	public void deleteUsers(String username) {
+		dao.deleteUsers(username);
+	}
 
 } //

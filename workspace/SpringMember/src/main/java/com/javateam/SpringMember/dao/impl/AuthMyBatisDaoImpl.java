@@ -50,5 +50,19 @@ public class AuthMyBatisDaoImpl implements AuthMyBatisDao {
 		sqlSession.getMapper(UserMapper.class)
 		  		  .insertUserRoles(users.getUsername(), role);
 	} //
+	
+	@Override
+	public void updateUsers(Users users) {
+
+		log.info("updateUsers");
+		sqlSession.getMapper(UserMapper.class).updateUser(users.getUsername(), users.getPassword());		
+	}
+
+	@Override
+	public void deleteUsers(String username) {
+
+		log.info("deleteUsers");
+		sqlSession.getMapper(UserMapper.class).deleteUser(username);
+	}
 
 } //

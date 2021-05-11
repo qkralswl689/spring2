@@ -20,6 +20,18 @@
 		<input type="button" 
 			   value="로그아웃"
 			   onclick="location.href='${pageContext.request.contextPath}/logout_proc.do'" />	
+			   
+		<input type="button" 
+			   value="회원정보 보기"
+			   onclick="location.href='${pageContext.request.contextPath}/member/member_view.do?memberId=${pageContext.request.userPrincipal.name}'" />			   
+			   
+		<input type="button" 
+			   value="회원정보 수정"
+			   onclick="location.href='${pageContext.request.contextPath}/member/member_update.do?memberId=${pageContext.request.userPrincipal.name}'" />
+			   
+		<input type="button" 
+			   value="회원정보 삭제"
+			   onclick="location.href='${pageContext.request.contextPath}/member/member_delete.do?memberId=${pageContext.request.userPrincipal.name}'" />	   	   
 	</c:if>
 	
 </body>

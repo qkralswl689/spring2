@@ -77,15 +77,14 @@ public class MemberViewTest {
         log.info("############### MemberController Test ###############");  
         
         // 로그인
-        /*
         mockMvc.perform(get("/login.do").with(httpBasic(memberId, memberPw)))      
                .andDo(print())
         	   .andExpect(status().isOk())
         	   .andExpect(view().name("/auth/login"))
         	   .andExpect(forwardedUrl("/WEB-INF/views//auth/login.jsp")) // "/" 2개(//) 처리 유의 !
         	   .andExpect(authenticated().withUsername(memberId));
+
         
-        */
         // 개별 회원정보 조회
         mockMvc.perform(get("/member/member_view.do")
         				.with(httpBasic(memberId, memberPw)) // 없으면 302 에러 유발 !

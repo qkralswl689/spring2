@@ -21,8 +21,10 @@
         <!-- <intercept-url pattern="/secured/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/> -->
         <!-- <intercept-url pattern="/welcome.do" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/> -->
         <intercept-url pattern="/welcome.do" access="isAuthenticated()"/>   
-        <!-- <intercept-url pattern="/secured/**" access="isAuthenticated()"/>      -->   
-        <!-- <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
+        <!-- <intercept-url pattern="/secured/**" access="isAuthenticated()"/>      -->
+      
+        <!-- 관리자 권한 -->   
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         
         <form-login login-page="/login.do"
        			    default-target-url="/welcome.do"

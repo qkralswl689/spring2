@@ -100,7 +100,7 @@
 	                <td>
 	                	 <fmt:formatDate value="${birth}" pattern="yyyy년  M월  d일" />	     
 	                </td>  
-	            </tr>   
+	            </tr>  
 				<!--// 생년월일 -->  
 	            					
 	            <!-- 우편변호  -->  

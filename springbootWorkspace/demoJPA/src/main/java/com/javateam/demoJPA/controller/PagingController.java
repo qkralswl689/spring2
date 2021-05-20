@@ -55,9 +55,7 @@ public class PagingController {
         log.info("paging");
        
         Pageable pageable = PageRequest.of(page-1, 5);
-       
         Page<DemoVO> pageList = svc.findAll(pageable);
-       
         List<DemoVO> list = pageList.getContent();
        
         model.addAttribute("total_page", pageList.getTotalPages());

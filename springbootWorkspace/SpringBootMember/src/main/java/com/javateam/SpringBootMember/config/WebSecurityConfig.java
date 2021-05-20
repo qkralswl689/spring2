@@ -108,13 +108,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/login.do").permitAll()
 					.antMatchers("/login_error.do").permitAll()
 					.antMatchers("/member/member_join.do").permitAll()
-					.antMatchers("/member/join_proc.do").permitAll()
-					// 폼점검 관련(아아디/이메일/휴대폰 중복 점검)
+					// .antMatchers("/member/join_proc.do").permitAll()
+					// 폼점검 관련(아이디/이메일/휴대폰 중복 점검)
 					.antMatchers("/member/*Check.do").permitAll()
-					// admin 폴더에 경우 admin 권한이 있는 사용자에게만 허용
+					.antMatchers("/member/*CheckUpdate.do").permitAll()
+					// member 폴더의 경우 회원 이상의 권한이 있으면 허용
+					.antMatchers("/member/**").authenticated()
+					// 마이 페이지의 경우 회원 이상의 권한이 있으면 허용
+					.antMatchers("/welcome.do").authenticated()
+					// admin 폴더의 경우 admin 권한이 있는 사용자에게만 허용
 					.antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 					// user 폴더에 경우 user 권한이 있는 사용자에게만 허용
-					.antMatchers("/user/**").hasAuthority("ROLE_USER").anyRequest().authenticated()
+					// .antMatchers("/user/**").hasAuthority("ROLE_USER").anyRequest().authenticated()
 					.and()
 				.csrf()
 					.ignoringAntMatchers("/member/member_join.do")
@@ -123,7 +128,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.and()
 				.formLogin()
 					.loginPage("/login.do")
-					// .loginProcessingUrl("/login.do")
+					.loginProcessingUrl("/login_proc.do")
 					// .defaultSuccessUrl("/welcome.do")
 					// .failureUrl("/login_error.do")
 					.successHandler(new CustomAuthenticationSuccess()) // 로그인 성공시 핸들러 메서드

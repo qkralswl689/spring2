@@ -1,6 +1,6 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 	id 'war'
 }
@@ -39,16 +39,16 @@ dependencies {
     providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
     
     // jQuery
-    implementation group: 'org.webjars', name: 'jquery', version: '3.5.1'
+    implementation 'org.webjars:jquery:3.6.0'
     
     // jQueryUI
     implementation 'org.webjars:jquery-ui:1.12.1'
     
     // bootstrap
-    implementation 'org.webjars:bootstrap:4.5.2'
+    implementation 'org.webjars:bootstrap:4.6.0'
     
     // popper.js
-    implementation 'org.webjars:popper.js:2.5.2'
+    implementation 'org.webjars:popper.js:1.16.0'
 
     // webjars javascript 자동 버전 관리
     implementation group: 'org.webjars', name: 'webjars-locator-core', version: '0.46'
@@ -57,7 +57,10 @@ dependencies {
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
     implementation "org.logback-extensions:logback-ext-spring:0.1.2"
 	implementation files("${System.properties['java.home']}/../lib/tools.jar")
-    
+	
+	// spring security taglib 지원성 추가
+	implementation 'org.springframework.security:spring-security-taglibs'
+	
 }
 
 test {

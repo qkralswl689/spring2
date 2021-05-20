@@ -1,7 +1,9 @@
 package com.javateam.SpringBootMember.controller;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.javateam.SpringBootMember.domain.CustomUser;
 import com.javateam.SpringBootMember.domain.MemberDTO;
 import com.javateam.SpringBootMember.domain.MemberVO;
 import com.javateam.SpringBootMember.service.MemberService;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 @Controller
-@Slf4j
+@Log4j2
 @RequestMapping("member")
 public class MemberController {
 	
@@ -34,7 +37,7 @@ public class MemberController {
 	public String joinProc(@ModelAttribute("memberDTO") MemberDTO memberDTO, Model model) {
 		
 		log.info("회원가입 처리");
-		String path = "/member/join_proc";
+		String path = "/member/join_action";
 		
 		log.info("회원정보 : " + memberDTO);
 		
@@ -54,12 +57,11 @@ public class MemberController {
 		return path;
 	}
 	
-	// @Secured({"ROLE_ADMIN"}) // 추가 : role 접근 제한 기능  
 	@RequestMapping("member_view.do")
 	public String memberViewForm(@RequestParam("memberId") String memberId,
 					Model model) {
 	
-		log.debug("회원조회(보기)폼");
+		log.info("회원조회(보기)폼");
 
 		MemberVO memberVO = memberService.getMember(memberId);
 		log.info("회원 정보 : " + memberVO);
@@ -69,16 +71,15 @@ public class MemberController {
 		
 		model.addAttribute("member", member);
 		model.addAttribute("birth", memberVO.getMemberBirth());
-
+		
 		return "/member/member_view";
-	}
+	}	
 	
-
 	@RequestMapping("member_update.do")
 	public String memberUpdateForm(@RequestParam("memberId") String memberId,
 					Model model) {
 	
-		log.debug("회원수정폼");
+		log.info("회원수정폼");
 		
 		MemberVO memberVO = memberService.getMember(memberId);
 		
@@ -95,16 +96,19 @@ public class MemberController {
 	public String updateProc(MemberDTO newMemberDTO,
 							@RequestParam("memberPassword1") String newMemberPassword) {
 		
-		log.debug("회원수정 처리");
+		log.info("회원수정 처리");
 		
 		log.info("#### 회원정보 : " + newMemberDTO);
 			
 		MemberDTO legacyMember = new MemberDTO(memberService.getMember(newMemberDTO.getMemberId()));
 		
-		log.debug("##########################################");
-		log.debug("기존 회원정보 : " + legacyMember);
-		log.debug("수정 회원정보 : " + newMemberDTO);
-		log.debug("신규 패쓰워드 : " + newMemberPassword);
+		// 기존 회원정보의 가입일 정보 입력
+		newMemberDTO.setMemberBirth(new SimpleDateFormat("yyyy-MM-dd").format(legacyMember.getMemberJoinDate().getTime()));
+		
+		log.info("##########################################");
+		log.info("기존 회원정보 : " + legacyMember);
+		log.info("수정 회원정보 : " + newMemberDTO);
+		log.info("신규 패쓰워드 : " + newMemberPassword);
 				
 		MemberVO memberVO = new MemberVO(newMemberDTO);
 		
@@ -113,25 +117,29 @@ public class MemberController {
 						   : newMemberPassword;
 		memberVO.setMemberPassword(newMemberPw);
 		
-		log.debug("저장 회원 정보 : " + memberVO);		
+		log.info("저장 회원 정보 : " + memberVO);		
 		
 		memberService.updateMember(memberVO);
 		
-		return "redirect:/welcome.do";
+		// return "redirect:/welcome.do";
+		// 변경
+		return "/auth/welcome";
 	}
 	
 	@RequestMapping("member_delete.do")
 	public String memberDeleteForm() {
 	
-		log.debug("회원삭제폼");
+		log.info("회원삭제폼");
 		return "/member/member_delete";
 	}
 	
-	@RequestMapping(value="delete_proc.do", method=RequestMethod.POST)
+	// 변경
+	@RequestMapping(value="delete_proc.do", method= {RequestMethod.POST, RequestMethod.GET})
+	// @RequestMapping(value="delete_proc.do", method= RequestMethod.POST)
 	public String memberDeleteProc(@RequestParam("memberId") String memberId,
 					Model model) {
 	
-		log.debug("회원삭제 처리 : " + memberService.isMember(memberId));
+		log.info("회원삭제 처리 : " + memberService.isMember(memberId));
 		
 		if (memberService.isMember(memberId)==true) {
 			memberService.deleteMember(memberId);
@@ -140,8 +148,9 @@ public class MemberController {
 			return "/error/db-err";
 		}
 		
-		return "redirect:/login.do";
+		// return "redirect:/login.do";
+		// 변경
+		return "/auth/welcome";
 	}
-	
 	
 }

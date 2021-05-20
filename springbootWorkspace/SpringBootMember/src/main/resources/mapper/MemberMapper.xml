@@ -17,8 +17,7 @@
 		WHERE member_phone=#{memberPhone}
 	</select>
 	
-	<!-- 회원정보 생성(삽입) -->
-	<insert id="insertMember" parameterType="com.javateam.SpringBootMember.domain.MemberVO">
+	<insert id="insertMember" parameterType="MemberVO">
 		INSERT INTO member_tbl VALUES 
 		(
 			#{memberId},
@@ -35,13 +34,13 @@
 	</insert>
 	
 	<!-- 회원정보 조회 -->
-	<select id="getMember" parameterType="String" resultType="com.javateam.SpringBootMember.domain.MemberVO">
+	<select id="getMember" parameterType="String" resultType="MemberVO">
 		SELECT * FROM member_tbl
 		WHERE member_id=#{memberId}
 	</select>	
 	
 	<!-- 회원정보 수정-->
-	<update id="updateMember" parameterType="com.javateam.SpringBootMember.domain.MemberVO">
+	<update id="updateMember" parameterType="MemberVO">
 		UPDATE member_tbl SET  
 			member_nickname=#{memberNickname},  
 			member_email=#{memberEmail}, 
@@ -71,5 +70,58 @@
 			 WHERE member_id != #{memberId}) 
 		WHERE member_phone = #{phone}
 	</select>
+	
+	<!-- 전체 회원 조회 -->
+	<select id="getAllMembers" resultType="MemberVO">
+        SELECT * FROM member_tbl
+    </select>
+    
+   	<!-- 전체 회원 수 얻기(획득) -->
+	<select id="getCountAllMembers" resultType="int">
+		SELECT count(*) FROM member_tbl
+	</select>
+   
+    <!-- 전체회원 조회 : 페이징 적용 -->
+    <select id="getMembersByPaging" parameterType="PageDTO" resultType="MemberVO">
+        SELECT *  
+        FROM (SELECT ROWNUM,  
+                     m.*,    
+                     FLOOR((ROWNUM - 1) / #{limit} + 1) page
+              FROM (  
+                     SELECT * FROM member_tbl  
+                     ORDER BY member_id ASC  
+                   ) m    
+              )    
+        WHERE page = #{page}
+    </select>
+    
+    <!-- 회원 검색 -->
+    <select id="getMembersByFieldAndPaging" parameterType="SearchVO" resultType="MemberVO">
+        SELECT *
+        FROM (SELECT ROWNUM,  
+                     m.*,    
+                     FLOOR((ROWNUM - 1) / #{limit} + 1) page  
+              FROM (  
+                     SELECT * FROM member_tbl  
+                     WHERE ${fld} ${expr}
+                     ORDER BY member_id ASC  
+                   ) m    
+              )    
+        WHERE page = #{page}
+    </select>
+    
+    <!-- 회원 검색 -->
+    <select id="getCountMembersByFieldAndPaging" parameterType="SearchVO" resultType="int">
+        SELECT count(*)
+        FROM (SELECT ROWNUM,  
+                     m.*,    
+                     FLOOR((ROWNUM - 1) / #{limit} + 1) page  
+              FROM (  
+                     SELECT * FROM member_tbl  
+                     WHERE ${fld} ${expr}
+                     ORDER BY member_id ASC  
+                   ) m    
+              )    
+    </select>
 	
 </mapper>

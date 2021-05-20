@@ -13,10 +13,10 @@ import com.javateam.demoJPA.domain.DemoVO;
 @Transactional(readOnly = true)
 public interface PagingJpaService extends PagingAndSortingRepository<DemoVO, Integer> {
  
-    Iterable<DemoVO> findAll(Sort sort);
+	Iterable<DemoVO> findAll(Sort sort);
    
     Page<DemoVO> findAll(Pageable pageable);
    
     DemoVO findById(BigDecimal id);
-   
+    
 } 

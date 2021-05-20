@@ -28,15 +28,16 @@ span#err_msg { color:red; }
 <!-- google material -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<!-- bootstrap CSS : 4.5.2 -->
-<link rel="stylesheet" href="${rootPath}/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- bootstrap CSS : 4.6.0 -->
+<link rel="stylesheet" href="${rootPath}/webjars/bootstrap/4.6.0/css/bootstrap.min.css">
 
-<!-- jquery -->  
-<script src="${rootPath}/webjars/jquery/3.5.1/jquery.min.js"></script>
+<!-- jquery : 3.6.0 -->  
+<script src="${rootPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
 
-<!-- bootstrap JS : 4.5.2 -->
-<script src="${rootPath}/webjars/popper.js/2.5.2/umd/popper.min.js"></script>
-<script src="${rootPath}/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- bootstrap JS : 4.6.0-->
+<script src="${rootPath}/webjars/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<script src="${rootPath}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 

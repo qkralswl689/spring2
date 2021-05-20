@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javateam.SpringBootMember.domain.CustomUser;
+// import com.javateam.SpringBootMember.domain.Role;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
  
  
 @Controller
-@Slf4j
+@Log4j2
 public class AuthController {
 	
 	@RequestMapping("/welcome.do")
@@ -28,6 +29,7 @@ public class AuthController {
 		return "/auth/welcome";
 	}
     
+	/*
     @RequestMapping(value= {"/admin/home.do", "/admin"}, 
 					method = RequestMethod.GET)
 	public String securedAdminHome(ModelMap model) {
@@ -50,7 +52,7 @@ public class AuthController {
 		model.addAttribute("message", "관리자 페이지에 들어오셨습니다.");
 		
 		return "/admin/home";
-    }
+    }*/
     
     @RequestMapping(value= {"/secured/home.do", "/secured"}, 
     				method = RequestMethod.GET)
@@ -77,23 +79,21 @@ public class AuthController {
 	    return "/secured/home";
     }
     
-    @RequestMapping(value="/login.do", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="/login.do", method = RequestMethod.GET)
     public String login() {
     	
     	log.info("login.do");
     	
+    	return "/auth/login"; 
+    }
+    
+    @RequestMapping(value="/login_proc.do", method = RequestMethod.POST)
+    public String loginProc() {
+    	
+    	log.debug("#### login_proc.do");
+    	
     	return "/auth/login";
     }
-	
-	
-	@RequestMapping(value="/login_proc.do", method = RequestMethod.POST)
-	public String loginProc() {
-	  
-	  	log.debug("login_proc.do");
-	  
-	  	return "/auth/login"; 
-  	}
-	 
     
     @RequestMapping(value="/logout_proc.do", method = RequestMethod.GET)
     public String logout(HttpServletRequest request,
@@ -129,13 +129,5 @@ public class AuthController {
 
         return "/auth/login";
     } //
-    
-    // 권한없는 페이지를 들어갔을때
-    @RequestMapping("/403")
-    public String accessDenied(){
-    	return "/error/403";
-    }
-    
-    
     
 } //

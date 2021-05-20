@@ -34,17 +34,17 @@ td
 }			
 </style>
 
-<!-- jQuery -->
-<script src="<c:url value="/webjars/jquery/3.5.1/jquery.min.js" />"></script>
+<!-- jquery -->
+<script src="${rootPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- bootstrap css -->
-<link rel="stylesheet" href="${rootPath}/webjars/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="${rootPath}/webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
 
 <!-- bootstrap js -->
-<script src="${rootPath}/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${rootPath}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 <!-- popper.js -->
-<script src="${rootPath}/webjars/popper.js/2.5.2/umd/popper.min.js"></script>
+<script src="${rootPath}/webjars/popper.js/1.16.0/popper.min.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -85,7 +85,7 @@ td
 
 		<form id="loginForm" 
 			  name="loginForm" 
-			  action="<c:url value='/login.do' />"
+			  action="<c:url value='/login_proc.do' />"
 			  method="POST">
 			  
 			<!-- csrf token -->			  

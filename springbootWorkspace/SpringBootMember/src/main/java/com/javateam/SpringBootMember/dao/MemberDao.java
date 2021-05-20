@@ -1,5 +1,7 @@
 package com.javateam.SpringBootMember.dao;
 
+import java.util.List;
+
 import com.javateam.SpringBootMember.domain.MemberVO;
 
 public interface MemberDao {
@@ -38,7 +40,7 @@ public interface MemberDao {
 	 * @return 회원정보
 	 * @throws Exception 예외처리
 	 */
-	MemberVO getMember(String memberId);
+	MemberVO getMember(String memberId);	
 	
 	/**
 	 * 개별 회원정보 레코드(튜플) 수정(갱신) (update)
@@ -80,5 +82,59 @@ public interface MemberDao {
 	 */
 	boolean isEnablePhone(String memberId, String phone);
 	
+	/**
+     * 페이징을 활용하여 일정한 수의 회원들만을 화면에 출력
+     *
+     * @param page 현재 페이지
+     * @param limit 한번에 출력할 수 있는 회원정보
+     * @return 회원정보들
+     * @throws Exception 예외처리
+     */
+    List<MemberVO> getMembersByPaging(int page, int limit);
+   
+    /**
+     * 전체 회원정보  레코드(튜플) 조회(read)
+     *
+     * @return 전체 회원정보
+     * @throws Exception 예외처리
+     */
+    List<MemberVO> getAllMembers();
+    
+	/**
+	 * 전체 회원수 조회(획득)
+	 * 
+	 * @return 전체 회원수
+	 */
+	int getCountAllMembers();
+    
+    /**
+     * 특정 필드(이름, 아이디, 주소 등등)를 이용한 검색 조회 : 페이징 지원
+     *
+     * @param fld 검색할 필드
+     * @param value 필드 값
+     * @param isLike 유사 검색(like) 여부  usage) 유사 검색 : true, 동등 검색 : false  
+     * @param page 현재 페이지
+     * @param limit 한번에 출력할 수 있는 회원정보
+     * @return 검색 결과(회원 정보들)
+     */
+    List<MemberVO> getMembersByFieldAndPaging(String fld,
+                                              Object value,
+                                              boolean isLike,
+                                              int page,
+                                              int limit);
+    
+    /**
+     * 특정 필드(이름, 아이디, 주소 등등)를 이용한 검색 레코드수 조회
+     *
+     * @param fld 검색할 필드
+     * @param value 필드 값
+     * @param isLike 유사 검색(like) 여부  usage) 유사 검색 : true, 동등 검색 : false  
+     * @param limit 한번에 출력할 수 있는 회원정보
+     * @return 검색 결과(회원 정보들)
+     */
+    int getCountMembersByFieldAndPaging(String fld,
+							            Object value,
+							            boolean isLike,
+							            int limit);
 	
 }

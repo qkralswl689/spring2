@@ -19,10 +19,11 @@
 <link rel="stylesheet" href="${rootPath}/static/css/member_join.css">
 
 <!-- jquery -->  
-<script src="${rootPath}/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="${rootPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
   
-<!-- jqueryui -->  
+<!-- jquery-ui -->  
 <link rel="stylesheet" href="${rootPath}/webjars/jquery-ui/1.12.1/jquery-ui.min.css">
+
 <script src="${rootPath}/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 
 <!-- daum 주소 검색 -->
@@ -100,11 +101,6 @@ $(function() {
 		    	  modelAttribute="memberDTO" 
 		          method="post"
 		          action="${rootPath}/member/join_proc.do">
-		          
-	            <!-- csrf token -->			  
-				<input type="hidden"                        
-					   name="${_csrf.parameterName}"
-					   value="${_csrf.token}"/>  
 		  
 		        <table id="joinFormTbl">  
 		  
